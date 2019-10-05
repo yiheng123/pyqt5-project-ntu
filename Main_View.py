@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 from random import randint
 
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout,\
     QListWidgetItem, QLabel
 from View import Main_Page1
-from View import Main_Page
+from View import McDonalds
+import sys
+from PyQt5.QtWidgets import QApplication
 
 class LeftTabWidget(QWidget):
 
@@ -46,10 +48,10 @@ class LeftTabWidget(QWidget):
         item = QListWidgetItem(QIcon('View/Logo/kFC.ico'), str('KFC'), self.listWidget)
         item.setSizeHint(QSize(16777215, 80))
         item.setTextAlignment(Qt.AlignCenter)
-        item = QListWidgetItem( str('See other days menu'), self.listWidget)
+        item = QListWidgetItem( str('View menu'), self.listWidget)
         item.setSizeHint(QSize(16777215, 80))
         item.setTextAlignment(Qt.AlignCenter)
-        item = QListWidgetItem( str('View Recipts'), self.listWidget)
+        item = QListWidgetItem( str('Cart and pay'), self.listWidget)
         item.setSizeHint(QSize(16777215, 80))
         item.setTextAlignment(Qt.AlignCenter)
         item = QListWidgetItem( str('Exit'), self.listWidget)
@@ -61,10 +63,17 @@ class LeftTabWidget(QWidget):
         
         main_window=Main_Page1.SlippedImgWidget('View/Pictures/bg.jpg', 'View/Pictures/fg.PNG')
         self.stackedWidget.addWidget(main_window)
-        first_window = QWidget()
-        ui=Main_Page.Ui_Main_page()
-        ui.setupUi(first_window)
-        self.stackedWidget.addWidget(first_window)
+        #main window
+        # first_window = QWidget()
+        # ui=Main_Page.Ui_Main_page()
+        # ui.setupUi(first_window)
+        # self.stackedWidget.addWidget(first_window)
+
+        
+        Mcdonalds_widnow = QWidget()
+        ui = McDonalds.Ui_Mcdonalds() #Ui_McDonalds()
+        ui.setupUi(Mcdonalds_widnow)
+        self.stackedWidget.addWidget(Mcdonalds_widnow)
 
 Stylesheet = """
 
@@ -99,8 +108,7 @@ QLabel {
 """
 
 if __name__ == '__main__':
-    import sys
-    from PyQt5.QtWidgets import QApplication
+
     app = QApplication(sys.argv)
     app.setStyleSheet(Stylesheet)
     w = LeftTabWidget()
