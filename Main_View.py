@@ -5,12 +5,13 @@ from random import randint
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize 
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout,\
-    QListWidgetItem, QLabel
+from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout, QListWidgetItem, QLabel , QMessageBox
 from View import Main_Page1
 from View import McDonalds
 import sys
 from PyQt5.QtWidgets import QApplication
+from datetime import datetime
+import pytz
 
 class LeftTabWidget(QWidget):
 
@@ -67,8 +68,14 @@ class LeftTabWidget(QWidget):
         self.stackedWidget.addWidget(main_window)
 
         #Mcdonalds Page
-        McDonalds_window = McDonalds.Odd_Mcdonald()
+        time_zone = pytz.timezone('Asia/Singapore') 
+        current_time = datetime.now(time_zone)
+        if current_time.hour <= 12:
+            McDonalds_window = McDonalds.Breakfast_Mcdonald()
+        elif current_time.hour >12:
+            McDonalds_window = McDonalds.Lunch_Mcdonald()  
         self.stackedWidget.addWidget(McDonalds_window)
+
 
 
 Stylesheet = """
