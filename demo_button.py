@@ -2,15 +2,12 @@ import sys
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton, QApplication
 
 StyleSheet = '''
-/*这里是通用设置，所有按钮都有效，不过后面的可以覆盖这个*/
+
 QPushButton {
-    border: none; /*去掉边框*/
+    border: none; 
 }
 /*
-QPushButton#xxx
-或者
-#xx
-都表示通过设置的objectName来指定
+
 */
 QPushButton#RedButton {
     background-color: #f44336; /*BGCOLOR*/

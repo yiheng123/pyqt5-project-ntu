@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from random import randint
 
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout,\
@@ -61,19 +62,14 @@ class LeftTabWidget(QWidget):
         
 
         
+        # Main page
         main_window=Main_Page1.SlippedImgWidget('View/Pictures/bg.jpg', 'View/Pictures/fg.PNG')
         self.stackedWidget.addWidget(main_window)
-        #main window
-        # first_window = QWidget()
-        # ui=Main_Page.Ui_Main_page()
-        # ui.setupUi(first_window)
-        # self.stackedWidget.addWidget(first_window)
 
-        
-        Mcdonalds_widnow = QWidget()
-        ui = McDonalds.Ui_Mcdonalds() #Ui_McDonalds()
-        ui.setupUi(Mcdonalds_widnow)
-        self.stackedWidget.addWidget(Mcdonalds_widnow)
+        #Mcdonalds Page
+        McDonalds_window = McDonalds.Odd_Mcdonald()
+        self.stackedWidget.addWidget(McDonalds_window)
+
 
 Stylesheet = """
 
