@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from random import randint
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QSize 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout, QListWidgetItem, QLabel , QMessageBox
 from View import Main_Page1
 from View import McDonalds
+from View import ViewMenu
 import sys
 from PyQt5.QtWidgets import QApplication
 from datetime import datetime
@@ -28,13 +28,12 @@ class LeftTabWidget(QWidget):
 
     def initUi(self):
         self.setWindowTitle("Canteen")
-        self.listWidget.currentRowChanged.connect(
-            self.stackedWidget.setCurrentIndex)
-
+        self.listWidget.currentRowChanged.connect(self.stackedWidget.setCurrentIndex)  #core feature, connect row change with the stack widget and display
         self.listWidget.setFrameShape(QListWidget.NoFrame)
 
         self.listWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.listWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        #add left side list widgets
         item = QListWidgetItem(QIcon(''), str('Main Page'), self.listWidget)
         item.setSizeHint(QSize(16777215, 80))
         item.setTextAlignment(Qt.AlignCenter)
@@ -56,11 +55,15 @@ class LeftTabWidget(QWidget):
         item = QListWidgetItem( str('Cart and pay'), self.listWidget)
         item.setSizeHint(QSize(16777215, 80))
         item.setTextAlignment(Qt.AlignCenter)
-        item = QListWidgetItem( str('Exit'), self.listWidget)
-        item.setSizeHint(QSize(16777215, 80))
-        item.setTextAlignment(Qt.AlignCenter)
+        # item = QListWidgetItem( str('Exit'), self.listWidget)
+        # item.setSizeHint(QSize(16777215, 80))
+        # item.setTextAlignment(Qt.AlignCenter)
 
         
+    #------------------------------------------------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------------------------
+    #add right side stack widget
 
         
         # Main page
@@ -75,6 +78,39 @@ class LeftTabWidget(QWidget):
         elif current_time.hour >12:
             McDonalds_window = McDonalds.Lunch_Mcdonald()  
         self.stackedWidget.addWidget(McDonalds_window)
+
+        #Subway Page
+        label = QLabel('Dummy Page ', self)
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet('background: rgb(%d, %d, %d);margin: 50px;' % (randint(0, 255), randint(0, 255), randint(0, 255)))
+        self.stackedWidget.addWidget(label)
+
+
+        #Malay Page
+        label = QLabel('Dummy Page ', self)
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet('background: rgb(%d, %d, %d);margin: 50px;' % (randint(0, 255), randint(0, 255), randint(0, 255)))
+        self.stackedWidget.addWidget(label)
+
+
+        
+        #KFC Page
+        label = QLabel('Dummy Page ', self)
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet('background: rgb(%d, %d, %d);margin: 50px;' % (randint(0, 255), randint(0, 255), randint(0, 255)))
+        self.stackedWidget.addWidget(label)
+
+
+
+        #view menu page
+        view_menu_window = ViewMenu.View_Menu()
+        self.stackedWidget.addWidget(view_menu_window)
+
+
+        #pay and cart page
+
+
+
 
 
 
