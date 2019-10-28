@@ -1,90 +1,187 @@
 from PyQt5.QtGui import QPixmap, QPainter
-from PyQt5.QtWidgets import QWidget ,QMessageBox
+from PyQt5.QtWidgets import QWidget ,QMessageBox,QApplication,QStackedWidget ,QVBoxLayout
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt, pyqtSignal, QTimer,QDate, QTime
 import os
 from datetime import datetime
 import pytz
 
-#must indicate the widget items should extend QWidget
-class Lunch_Mcdonald(QWidget):
-    #initialize
-    def __init__(self,parent=None):
-        super(Lunch_Mcdonald,self).__init__(parent)
 
-        self.setup_Ui()
-        self.string="" # string to write to file
-        self.BlueButton.clicked.connect(self.clear_all) #button connnect to clear all user input and cart database
-        self.BlueButton_2.clicked.connect(self.add_to_cart) #add the user input and calculate price
-        self.BlueButton_3.clicked.connect(self.operate_hours)
-        
-    #function to clear all the user unput and remove database
-    def clear_all(self): 
-        #clear all the num value
-        self.item_one_num.setValue(0)
-        self.item_two_num.setValue(0)
-        self.item_three_num.setValue(0)
-        self.item_four_num.setValue(0)
-        self.item_five_num.setValue(0)
-        self.item_six_num.setValue(0)
-        self.item_seven_num.setValue(0)
-        self.item_eight_num.setValue(0)
-        self.item_nine_num.setValue(0)
-        self.item_ten_num.setValue(0)
-        #clear the string write to data base
-        self.string=""        
-        try:
-            os.remove("C:/Users/RUIZHI/Desktop/mini_project/cart.txt") #remove data base
-        except:
-            pass
-
-
+class QLabelClickable(QtWidgets.QLabel):
+    clicked = pyqtSignal(str)
+    def __init__(self, parent=None):
+        super(QLabelClickable, self).__init__(parent)
+    def mousePressEvent(self, event):
+        self.ultimo = "Clic"
     
-    def add_to_cart(self):
-        #group all items inside dictionary
-        items_lists=[
-            [self.item_one_num,self.item_one_price,self.item_one_text] ,
-            [self.item_two_num,self.item_two_price,self.item_two_text] ,
-            [self.item_three_num,self.item_three_price,self.item_three_text] ,
-            [self.item_four_num,self.item_four_price,self.item_four_text] ,
-            [self.item_five_num,self.item_five_price,self.item_five_text] ,
-            [self.item_six_num,self.item_six_price,self.item_six_text] ,
-            [self.item_seven_num,self.item_seven_price,self.item_seven_text] ,
-            [self.item_eight_num,self.item_eight_price,self.item_eight_text] ,
-            [self.item_nine_num,self.item_nine_price,self.item_nine_text] ,
-            [self.item_ten_num,self.item_ten_price,self.item_ten_text] ,
-        ]
-        #prepare to write the data to database
-        with open("C:/Users/RUIZHI/Desktop/mini_project/cart.txt","w") as f:
-            for item_list in items_lists:
-                print(item_list[0].value()) #for debugging
-                if item_list[0].value() != 0:
-                    item_name = str(item_list[2].text()) 
-                    item_price_text = str(item_list[1].text())[1:]
-                    item_price = float(item_price_text)
-                    total_price = item_price*int(item_list[0].value())
-                    self.string = self.string + item_name.replace(" ","_") + " " + str(item_list[0].value()) + " " +  str('{0:.2f}'.format(total_price)) + "\n" #format string and add together
-            f.write(self.string) #write string to data base
-            self.string=""  #clear string
+    def mouseReleaseEvent(self, event):
+        if self.ultimo == "Clic":
+            QTimer.singleShot(QApplication.instance().doubleClickInterval(),
+                              self.performSingleClickAction)
+        else:
+            # Realizar acción de doble clic.
+            self.clicked.emit(self.ultimo)
+    def mouseDoubleClickEvent(self, event):
+        self.ultimo = "Doble Clic"
+    def performSingleClickAction(self):
+        if self.ultimo == "Clic":
+            self.clicked.emit(self.ultimo)
 
-    def operate_hours(self):
-        operating_hour_dic = {
-            (0,1,2,3,4) : "8am - 12pm", #weekdays
-            (5,6) : "11am - 12pm", #weekends
-        }
-        tz_SG = pytz.timezone('Asia/Singapore') 
-        now = datetime.now(tz_SG)
-        now_weekday = now.weekday()
-        for key in operating_hour_dic:
-            if now_weekday in key:
-                self.operating_hour = operating_hour_dic[key]
-
-        print(self.operating_hour)
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Mcdonalds", "Form"))
-        self.operating_hour_text.setText(_translate("Mcdonalds", "Operating Hours: "+self.operating_hour))
-    #function to setup ui
+class View_Menu_First_Page(QWidget):
+    switch_window = pyqtSignal(str)
+    def __init__(self,parent=None):
+        super(View_Menu_First_Page,self).__init__(parent)
+        self.setup_Ui()
     def setup_Ui(self):
-        self.setObjectName("Mcdonald")
+        self.setObjectName("ViewMenu_Select_Store")
+        self.resize(800, 600)
+        self.label_title = QtWidgets.QLabel(self)
+        self.label_title.setGeometry(QtCore.QRect(180, 40, 431, 71))
+        font = QtGui.QFont()
+        font.setFamily("Papyrus")
+        font.setPointSize(24)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_title.setFont(font)
+        self.label_title.setLineWidth(1)
+        self.label_title.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_title.setObjectName("label_title")
+        self.label_mcdonalds = QLabelClickable(self)
+        self.label_mcdonalds.setGeometry(QtCore.QRect(120, 140, 200, 200))
+        self.label_mcdonalds.setText("")
+        self.label_mcdonalds.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonald.png"))
+        self.label_mcdonalds.setScaledContents(True)
+        self.label_mcdonalds.setObjectName("label_mcdonalds")
+        self.label_mcdonalds.clicked.connect(self.link_click)
+
+        self.label_kfc = QtWidgets.QLabel(self)
+        self.label_kfc.setGeometry(QtCore.QRect(470, 360, 200, 200))
+        self.label_kfc.setText("")
+        self.label_kfc.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/590607570cbeef0acff9a641.png"))
+        self.label_kfc.setScaledContents(True)
+        self.label_kfc.setObjectName("label_kfc")
+        self.label_subway = QtWidgets.QLabel(self)
+        self.label_subway.setGeometry(QtCore.QRect(470, 140, 200, 200))
+        self.label_subway.setText("")
+        self.label_subway.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/subway-logo.jpg"))
+        self.label_subway.setScaledContents(True)
+        self.label_subway.setObjectName("label_subway")
+        self.label_malay = QtWidgets.QLabel(self)
+        self.label_malay.setGeometry(QtCore.QRect(120, 360, 200, 200))
+        self.label_malay.setText("")
+        self.label_malay.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/39840570-nasi-goreng-icon-indonesian-fried-rice.jpg"))
+        self.label_malay.setScaledContents(True)
+        self.label_malay.setObjectName("label_malay")
+        QtCore.QMetaObject.connectSlotsByName(self)
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("ViewMenu_Select_Store", "Form"))
+        self.label_title.setText(_translate("ViewMenu_Select_Store", "Select Store Menu"))
+    def link_click(self):
+        print("haha")
+        self.switch_window.emit("Mcdonalds")
+        return "Mcdonalds"
+        #global text = "Mcdonalds"
+
+
+
+class View_Menu_Second_Page(QWidget):
+    switch_window = pyqtSignal(str)
+    def __init__(self,text,parent=None):
+        super(View_Menu_Second_Page,self).__init__(parent)
+        self.setup_Ui(text)
+        self.BlueButton.clicked.connect(self.submit_click)
+    def setup_Ui(self,text):
+        self.setObjectName("View_Menu_Second_Page")
+        self.resize(800, 600)
+        self.label = QtWidgets.QLabel(self)
+        self.label.setGeometry(QtCore.QRect(230, 20, 321, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.BlueButton = QtWidgets.QPushButton(self)
+        self.BlueButton.setGeometry(QtCore.QRect(630, 180, 96, 96))
+        self.BlueButton.setStyleSheet("#BlueButton {\n"
+"    background-color: #303d5e;\n"
+"    /*minimum size*/\n"
+"    min-width: 96px;\n"
+"    max-width: 96px;\n"
+"    min-height: 96px;\n"
+"    max-height: 96px;\n"
+"    border-radius: 48px; /*Round*/\n"
+"}\n"
+"#BlueButton:hover {\n"
+"    background-color: #516cb0;\n"
+"}\n"
+"#BlueButton:pressed {\n"
+"    background-color: #04070f;\n"
+"}")
+        self.BlueButton.setObjectName("BlueButton")
+        self.label_2 = QtWidgets.QLabel(self)
+        self.label_2.setGeometry(QtCore.QRect(50, 100, 711, 51))
+        font = QtGui.QFont()
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_2.setFont(font)
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self)
+        self.label_3.setGeometry(QtCore.QRect(100, 300, 571, 291))
+        self.label_3.setText("")
+        self.label_3.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/"+text+".png"))
+        self.label_3.setScaledContents(True)
+        self.label_3.setObjectName("label_3")
+        self.dateEdit = QtWidgets.QDateEdit(self)
+        self.dateEdit.setGeometry(QtCore.QRect(120, 200, 241, 81))
+        font = QtGui.QFont()
+        font.setFamily("MV Boli")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.dateEdit.setFont(font)
+        self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDate(QDate.currentDate())
+        self.dateEdit.setObjectName("dateEdit")
+        self.timeEdit = QtWidgets.QTimeEdit(self)
+        self.timeEdit.setTime(QTime.currentTime())
+        self.timeEdit.setGeometry(QtCore.QRect(360, 200, 241, 81))
+        font = QtGui.QFont()
+        font.setFamily("MV Boli")
+        font.setPointSize(14)
+        font.setBold(True)
+        font.setWeight(75)
+        self.timeEdit.setFont(font)
+        self.timeEdit.setObjectName("timeEdit")
+        _translate = QtCore.QCoreApplication.translate
+        self.setWindowTitle(_translate("Form", "Form"))
+        self.label.setText(_translate("Form", text))
+        self.BlueButton.setText(_translate("Form", "Submit"))
+        self.label_2.setText(_translate("Form", "Please Select The Date and Time You Would Like To View"))
+    def submit_click(self):
+        print(self.dateEdit.date())
+        date = self.dateEdit.date().toPyDate()
+        time = self.timeEdit.time().toPyTime()
+        datetime_str = str(date)+" "+str(time)[0:8]
+        print(datetime_str)
+        return datetime_str
+
+class View_Menu_Third_Page(QWidget):
+
+    def __init__(self,store,dateandtime,parent=None):
+        super(View_Menu_Third_Page,self).__init__(parent)
+        print(dateandtime[11:13])
+        if store == "Mcdonalds":
+            if int(dateandtime[11:13]) >= 12:
+                self.setup_Ui_Pm_Mcdonalds()
+            else:
+                self.setup_Ui_Am_Mcdonalds()
+    
+    def setup_Ui_Pm_Mcdonalds(self):
+        self.setObjectName("Pm Mcdonald")
         self.resize(800,600)
         self.operating_hour_text = QtWidgets.QLabel(self)
         font = QtGui.QFont()
@@ -99,9 +196,6 @@ class Lunch_Mcdonald(QWidget):
         self.item_six_price = QtWidgets.QLabel(self)
         self.item_six_price.setGeometry(QtCore.QRect(280, 310, 31, 16))
         self.item_six_price.setObjectName("item_six_price")
-        self.item_six_num = QtWidgets.QSpinBox(self)
-        self.item_six_num.setGeometry(QtCore.QRect(280, 330, 42, 22))
-        self.item_six_num.setObjectName("item_six_num")
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
@@ -123,15 +217,9 @@ class Lunch_Mcdonald(QWidget):
         self.item_eight_text.setFont(font)
         self.item_eight_text.setAlignment(QtCore.Qt.AlignCenter)
         self.item_eight_text.setObjectName("item_eight_text")
-        self.item_five_num = QtWidgets.QSpinBox(self)
-        self.item_five_num.setGeometry(QtCore.QRect(70, 330, 42, 22))
-        self.item_five_num.setObjectName("item_five_num")
         self.item_five_price = QtWidgets.QLabel(self)
         self.item_five_price.setGeometry(QtCore.QRect(70, 310, 31, 16))
         self.item_five_price.setObjectName("item_five_price")
-        self.item_seven_num = QtWidgets.QSpinBox(self)
-        self.item_seven_num.setGeometry(QtCore.QRect(480, 330, 42, 22))
-        self.item_seven_num.setObjectName("item_seven_num")
         self.item_six_text = QtWidgets.QLabel(self)
         self.item_six_text.setGeometry(QtCore.QRect(250, 290, 121, 16))
         font = QtGui.QFont()
@@ -150,9 +238,6 @@ class Lunch_Mcdonald(QWidget):
         self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Chicken.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
-        self.item_eight_num = QtWidgets.QSpinBox(self)
-        self.item_eight_num.setGeometry(QtCore.QRect(690, 330, 42, 22))
-        self.item_eight_num.setObjectName("item_eight_num")
         self.item_five_text = QtWidgets.QLabel(self)
         self.item_five_text.setGeometry(QtCore.QRect(40, 290, 111, 20))
         font = QtGui.QFont()
@@ -183,9 +268,6 @@ class Lunch_Mcdonald(QWidget):
         self.item_two_price = QtWidgets.QLabel(self)
         self.item_two_price.setGeometry(QtCore.QRect(280, 130, 31, 16))
         self.item_two_price.setObjectName("item_two_price")
-        self.item_two_num = QtWidgets.QSpinBox(self)
-        self.item_two_num.setGeometry(QtCore.QRect(280, 150, 42, 22))
-        self.item_two_num.setObjectName("item_two_num")
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
@@ -207,15 +289,9 @@ class Lunch_Mcdonald(QWidget):
         self.item_four_text.setFont(font)
         self.item_four_text.setAlignment(QtCore.Qt.AlignCenter)
         self.item_four_text.setObjectName("item_four_text")
-        self.item_one_num = QtWidgets.QSpinBox(self)
-        self.item_one_num.setGeometry(QtCore.QRect(70, 150, 42, 22))
-        self.item_one_num.setObjectName("item_one_num")
         self.item_one_price = QtWidgets.QLabel(self)
         self.item_one_price.setGeometry(QtCore.QRect(70, 130, 31, 16))
         self.item_one_price.setObjectName("item_one_price")
-        self.item_three_num = QtWidgets.QSpinBox(self)
-        self.item_three_num.setGeometry(QtCore.QRect(480, 150, 42, 22))
-        self.item_three_num.setObjectName("item_three_num")
         self.item_two_text = QtWidgets.QLabel(self)
         self.item_two_text.setGeometry(QtCore.QRect(240, 110, 131, 16))
         font = QtGui.QFont()
@@ -234,9 +310,6 @@ class Lunch_Mcdonald(QWidget):
         self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Double Mcspicy.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
-        self.item_four_num = QtWidgets.QSpinBox(self)
-        self.item_four_num.setGeometry(QtCore.QRect(680, 150, 42, 22))
-        self.item_four_num.setObjectName("item_four_num")
         self.item_one_text = QtWidgets.QLabel(self)
         self.item_one_text.setGeometry(QtCore.QRect(40, 110, 121, 16))
         font = QtGui.QFont()
@@ -267,12 +340,6 @@ class Lunch_Mcdonald(QWidget):
         self.item_ten_price = QtWidgets.QLabel(self)
         self.item_ten_price.setGeometry(QtCore.QRect(290, 480, 31, 16))
         self.item_ten_price.setObjectName("item_ten_price")
-        self.item_ten_num = QtWidgets.QSpinBox(self)
-        self.item_ten_num.setGeometry(QtCore.QRect(280, 500, 42, 22))
-        self.item_ten_num.setObjectName("item_ten_num")
-        self.item_nine_num = QtWidgets.QSpinBox(self)
-        self.item_nine_num.setGeometry(QtCore.QRect(70, 500, 42, 22))
-        self.item_nine_num.setObjectName("item_nine_num")
         self.item_nine_price = QtWidgets.QLabel(self)
         self.item_nine_price.setGeometry(QtCore.QRect(70, 480, 31, 16))
         self.item_nine_price.setObjectName("item_nine_price")
@@ -306,136 +373,36 @@ class Lunch_Mcdonald(QWidget):
         self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
-        self.BlueButton = QtWidgets.QPushButton(self)
-        self.BlueButton.setGeometry(QtCore.QRect(580, 500, 72, 72))
-        self.BlueButton.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton.setObjectName("BlueButton")
-        self.BlueButton_2 = QtWidgets.QPushButton(self)
-        self.BlueButton_2.setGeometry(QtCore.QRect(700, 500, 72, 72))
-        self.BlueButton_2.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton_2.setObjectName("BlueButton_2")
-        self.BlueButton_3 = QtWidgets.QPushButton(self)
-        self.BlueButton_3.setGeometry(QtCore.QRect(460, 500, 72, 72))
-        self.BlueButton_3.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton_3.setObjectName("BlueButton_3")
-        self.BlueButton_3.raise_()
-        self.BlueButton.raise_()
         self.item_six_price.raise_()
-        self.item_six_num.raise_()
         self.item_seven_pic.raise_()
         self.item_eight_pic.raise_()
         self.item_eight_text.raise_()
-        self.item_five_num.raise_()
         self.item_five_price.raise_()
-        self.item_seven_num.raise_()
         self.item_six_text.raise_()
         self.item_seven_price.raise_()
         self.item_five_pic.raise_()
-        self.item_eight_num.raise_()
         self.item_five_text.raise_()
         self.item_seven_text.raise_()
         self.item_six_pic.raise_()
         self.item_eight_price.raise_()
         self.item_two_price.raise_()
-        self.item_two_num.raise_()
         self.item_three_pic.raise_()
         self.item_four_pic.raise_()
         self.item_four_text.raise_()
-        self.item_one_num.raise_()
         self.item_one_price.raise_()
-        self.item_three_num.raise_()
         self.item_two_text.raise_()
         self.item_three_price.raise_()
         self.item_one_pic.raise_()
-        self.item_four_num.raise_()
         self.item_one_text.raise_()
         self.item_three_text.raise_()
         self.item_two_pic.raise_()
         self.item_four_price.raise_()
         self.item_ten_price.raise_()
-        self.item_ten_num.raise_()
-        self.item_nine_num.raise_()
         self.item_nine_price.raise_()
         self.item_ten_text.raise_()
         self.item_nine_pic.raise_()
         self.item_nine_text.raise_()
         self.item_ten_pic.raise_()
-        self.BlueButton_2.raise_()
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Mcdonalds", "Form"))
         self.item_six_price.setText(_translate("Mcdonalds", "$5.7"))
@@ -458,89 +425,9 @@ class Lunch_Mcdonald(QWidget):
         self.item_nine_price.setText(_translate("Mcdonalds", "$2.0"))
         self.item_ten_text.setText(_translate("Mcdonalds", "Fries"))
         self.item_nine_text.setText(_translate("Mcdonalds", "Apple Pie"))
-        self.BlueButton.setText(_translate("Mcdonalds", "Clear all"))
-        self.BlueButton_2.setText(_translate("Mcdonalds", "Add to Cart"))
-        self.BlueButton_3.setText(_translate("Mcdonalds", "Operate Hours"))
 
 
-class Breakfast_Mcdonald(QWidget):
-    #initialize
-    def __init__(self,parent=None):
-        super(Breakfast_Mcdonald,self).__init__(parent)
-
-        self.setup_Ui()
-        self.string="" # string to write to file
-        self.BlueButton.clicked.connect(self.clear_all) #button connnect to clear all user input and cart database
-        self.BlueButton_2.clicked.connect(self.add_to_cart) #add the user input and calculate price
-        self.BlueButton_3.clicked.connect(self.operate_hours)
-        
-    #function to clear all the user unput and remove database
-    def clear_all(self): 
-        #clear all the num value
-        self.item_one_num.setValue(0)
-        self.item_two_num.setValue(0)
-        self.item_three_num.setValue(0)
-        self.item_four_num.setValue(0)
-        self.item_five_num.setValue(0)
-        self.item_six_num.setValue(0)
-        self.item_seven_num.setValue(0)
-        self.item_eight_num.setValue(0)
-        self.item_nine_num.setValue(0)
-        self.item_ten_num.setValue(0)
-        #clear the string write to data base
-        self.string=""        
-        try:
-            os.remove("C:/Users/RUIZHI/Desktop/mini_project/cart.txt") #remove data base
-        except:
-            pass
-
-
-    
-    def add_to_cart(self):
-        #group all items inside dictionary
-        items_lists=[
-            [self.item_one_num,self.item_one_price,self.item_one_text] ,
-            [self.item_two_num,self.item_two_price,self.item_two_text] ,
-            [self.item_three_num,self.item_three_price,self.item_three_text] ,
-            [self.item_four_num,self.item_four_price,self.item_four_text] ,
-            [self.item_five_num,self.item_five_price,self.item_five_text] ,
-            [self.item_six_num,self.item_six_price,self.item_six_text] ,
-            [self.item_seven_num,self.item_seven_price,self.item_seven_text] ,
-            [self.item_eight_num,self.item_eight_price,self.item_eight_text] ,
-            [self.item_nine_num,self.item_nine_price,self.item_nine_text] ,
-            [self.item_ten_num,self.item_ten_price,self.item_ten_text] ,
-        ]
-        #prepare to write the data to database
-        with open("C:/Users/RUIZHI/Desktop/mini_project/cart.txt","w") as f:
-            for item_list in items_lists:
-                print(item_list[0].value()) #for debugging
-                if item_list[0].value() != 0:
-                    item_name = str(item_list[2].text()) 
-                    item_price_text = str(item_list[1].text())[1:]
-                    item_price = float(item_price_text)
-                    total_price = item_price*int(item_list[0].value())
-                    self.string = self.string + item_name.replace(" ","_") + " " + str(item_list[0].value()) + " " +  str('{0:.2f}'.format(total_price)) + "\n" #format string and add together
-            f.write(self.string) #write string to data base
-            self.string=""  #clear string
-
-    def operate_hours(self):
-        operating_hour_dic = {
-            (0,1,2,3,4) : "8am - 12pm", #weekdays
-            (5,6) : "11am - 12pm", #weekends
-        }
-        
-        tz_SG = pytz.timezone('Asia/Singapore') 
-        now = datetime.now(tz_SG)
-        now_weekday = now.weekday()
-        for key in operating_hour_dic:
-            if now_weekday in key:
-                self.operating_hour = operating_hour_dic[key]
-        print(self.operating_hour)
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Mcdonalds", "Form"))
-        self.operating_hour_text.setText(_translate("Mcdonalds", "Operating Hours: "+self.operating_hour))
-    #function to setup ui
-    def setup_Ui(self):
+    def setup_Ui_Am_Mcdonalds(self):
         self.setObjectName("Mcdonald")
         self.resize(800,600)
         self.operating_hour_text = QtWidgets.QLabel(self)
@@ -556,9 +443,6 @@ class Breakfast_Mcdonald(QWidget):
         self.item_six_price = QtWidgets.QLabel(self)
         self.item_six_price.setGeometry(QtCore.QRect(280, 310, 31, 16))
         self.item_six_price.setObjectName("item_six_price")
-        self.item_six_num = QtWidgets.QSpinBox(self)
-        self.item_six_num.setGeometry(QtCore.QRect(280, 330, 42, 22))
-        self.item_six_num.setObjectName("item_six_num")
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
@@ -580,15 +464,9 @@ class Breakfast_Mcdonald(QWidget):
         self.item_eight_text.setFont(font)
         self.item_eight_text.setAlignment(QtCore.Qt.AlignCenter)
         self.item_eight_text.setObjectName("item_eight_text")
-        self.item_five_num = QtWidgets.QSpinBox(self)
-        self.item_five_num.setGeometry(QtCore.QRect(70, 330, 42, 22))
-        self.item_five_num.setObjectName("item_five_num")
         self.item_five_price = QtWidgets.QLabel(self)
         self.item_five_price.setGeometry(QtCore.QRect(70, 310, 31, 16))
         self.item_five_price.setObjectName("item_five_price")
-        self.item_seven_num = QtWidgets.QSpinBox(self)
-        self.item_seven_num.setGeometry(QtCore.QRect(480, 330, 42, 22))
-        self.item_seven_num.setObjectName("item_seven_num")
         self.item_six_text = QtWidgets.QLabel(self)
         self.item_six_text.setGeometry(QtCore.QRect(250, 290, 121, 16))
         font = QtGui.QFont()
@@ -607,9 +485,6 @@ class Breakfast_Mcdonald(QWidget):
         self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Filet O Fish.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
-        self.item_eight_num = QtWidgets.QSpinBox(self)
-        self.item_eight_num.setGeometry(QtCore.QRect(690, 330, 42, 22))
-        self.item_eight_num.setObjectName("item_eight_num")
         self.item_five_text = QtWidgets.QLabel(self)
         self.item_five_text.setGeometry(QtCore.QRect(40, 290, 111, 20))
         font = QtGui.QFont()
@@ -640,9 +515,6 @@ class Breakfast_Mcdonald(QWidget):
         self.item_two_price = QtWidgets.QLabel(self)
         self.item_two_price.setGeometry(QtCore.QRect(280, 130, 31, 16))
         self.item_two_price.setObjectName("item_two_price")
-        self.item_two_num = QtWidgets.QSpinBox(self)
-        self.item_two_num.setGeometry(QtCore.QRect(280, 150, 42, 22))
-        self.item_two_num.setObjectName("item_two_num")
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
@@ -664,15 +536,9 @@ class Breakfast_Mcdonald(QWidget):
         self.item_four_text.setFont(font)
         self.item_four_text.setAlignment(QtCore.Qt.AlignCenter)
         self.item_four_text.setObjectName("item_four_text")
-        self.item_one_num = QtWidgets.QSpinBox(self)
-        self.item_one_num.setGeometry(QtCore.QRect(70, 150, 42, 22))
-        self.item_one_num.setObjectName("item_one_num")
         self.item_one_price = QtWidgets.QLabel(self)
         self.item_one_price.setGeometry(QtCore.QRect(70, 130, 31, 16))
         self.item_one_price.setObjectName("item_one_price")
-        self.item_three_num = QtWidgets.QSpinBox(self)
-        self.item_three_num.setGeometry(QtCore.QRect(480, 150, 42, 22))
-        self.item_three_num.setObjectName("item_three_num")
         self.item_two_text = QtWidgets.QLabel(self)
         self.item_two_text.setGeometry(QtCore.QRect(240, 110, 131, 16))
         font = QtGui.QFont()
@@ -691,9 +557,6 @@ class Breakfast_Mcdonald(QWidget):
         self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Chicken Muffin.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
-        self.item_four_num = QtWidgets.QSpinBox(self)
-        self.item_four_num.setGeometry(QtCore.QRect(680, 150, 42, 22))
-        self.item_four_num.setObjectName("item_four_num")
         self.item_one_text = QtWidgets.QLabel(self)
         self.item_one_text.setGeometry(QtCore.QRect(40, 110, 121, 16))
         font = QtGui.QFont()
@@ -724,12 +587,6 @@ class Breakfast_Mcdonald(QWidget):
         self.item_ten_price = QtWidgets.QLabel(self)
         self.item_ten_price.setGeometry(QtCore.QRect(290, 480, 31, 16))
         self.item_ten_price.setObjectName("item_ten_price")
-        self.item_ten_num = QtWidgets.QSpinBox(self)
-        self.item_ten_num.setGeometry(QtCore.QRect(280, 500, 42, 22))
-        self.item_ten_num.setObjectName("item_ten_num")
-        self.item_nine_num = QtWidgets.QSpinBox(self)
-        self.item_nine_num.setGeometry(QtCore.QRect(70, 500, 42, 22))
-        self.item_nine_num.setObjectName("item_nine_num")
         self.item_nine_price = QtWidgets.QLabel(self)
         self.item_nine_price.setGeometry(QtCore.QRect(70, 480, 31, 16))
         self.item_nine_price.setObjectName("item_nine_price")
@@ -763,136 +620,36 @@ class Breakfast_Mcdonald(QWidget):
         self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
-        self.BlueButton = QtWidgets.QPushButton(self)
-        self.BlueButton.setGeometry(QtCore.QRect(580, 500, 72, 72))
-        self.BlueButton.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton.setObjectName("BlueButton")
-        self.BlueButton_2 = QtWidgets.QPushButton(self)
-        self.BlueButton_2.setGeometry(QtCore.QRect(700, 500, 72, 72))
-        self.BlueButton_2.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton_2.setObjectName("BlueButton_2")
-        self.BlueButton_3 = QtWidgets.QPushButton(self)
-        self.BlueButton_3.setGeometry(QtCore.QRect(460, 500, 72, 72))
-        self.BlueButton_3.setStyleSheet("QPushButton {\n"
-"    border: none; \n"
-"    background-color: #303d5e;\n"
-"    /*minimum size*/\n"
-"    min-width: 72px;\n"
-"    max-width: 72px;\n"
-"    min-height: 72px;\n"
-"    max-height: 72px;\n"
-"    border-radius: 36px; /*Round*/\n"
-"    color: #FFFFFF;\n"
-"    \n"
-"}\n"
-"QPushButton:hover {\n"
-"     background-color: #516cb0;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"     background-color: #04070f;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"\n"
-"")
-        self.BlueButton_3.setObjectName("BlueButton_3")
-        self.BlueButton_3.raise_()
-        self.BlueButton.raise_()
         self.item_six_price.raise_()
-        self.item_six_num.raise_()
         self.item_seven_pic.raise_()
         self.item_eight_pic.raise_()
         self.item_eight_text.raise_()
-        self.item_five_num.raise_()
         self.item_five_price.raise_()
-        self.item_seven_num.raise_()
         self.item_six_text.raise_()
         self.item_seven_price.raise_()
         self.item_five_pic.raise_()
-        self.item_eight_num.raise_()
         self.item_five_text.raise_()
         self.item_seven_text.raise_()
         self.item_six_pic.raise_()
         self.item_eight_price.raise_()
         self.item_two_price.raise_()
-        self.item_two_num.raise_()
         self.item_three_pic.raise_()
         self.item_four_pic.raise_()
         self.item_four_text.raise_()
-        self.item_one_num.raise_()
         self.item_one_price.raise_()
-        self.item_three_num.raise_()
         self.item_two_text.raise_()
         self.item_three_price.raise_()
         self.item_one_pic.raise_()
-        self.item_four_num.raise_()
         self.item_one_text.raise_()
         self.item_three_text.raise_()
         self.item_two_pic.raise_()
         self.item_four_price.raise_()
         self.item_ten_price.raise_()
-        self.item_ten_num.raise_()
-        self.item_nine_num.raise_()
         self.item_nine_price.raise_()
         self.item_ten_text.raise_()
         self.item_nine_pic.raise_()
         self.item_nine_text.raise_()
         self.item_ten_pic.raise_()
-        self.BlueButton_2.raise_()
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Mcdonalds", "Form"))
         self.item_six_price.setText(_translate("Mcdonalds", "$3.5"))
@@ -915,14 +672,61 @@ class Breakfast_Mcdonald(QWidget):
         self.item_nine_price.setText(_translate("Mcdonalds", "$8.2"))
         self.item_ten_text.setText(_translate("Mcdonalds", "Fries"))
         self.item_nine_text.setText(_translate("Mcdonalds", "Breakfast Platter"))
-        self.BlueButton.setText(_translate("Mcdonalds", "Clear all"))
-        self.BlueButton_2.setText(_translate("Mcdonalds", "Add to Cart"))
-        self.BlueButton_3.setText(_translate("Mcdonalds", "Operate Hours"))
+
+        
+    
+
+class View_Menu(QWidget):
+
+    def __init__(self,parent=None):
+        super(View_Menu,self).__init__(parent)
+        self.resize(800,600)
+        self.stackedwidget = QStackedWidget(self)
+        self.stackedwidget.setGeometry(QtCore.QRect(0,0 , 800, 600))
+        self.stackedwidget.setObjectName("stackwidget")
+        self.add_first_page()
+        self.repaint()
+
+
+    def add_first_page(self):
+        self.first_page = View_Menu_First_Page()
+        self.stackedwidget.addWidget(self.first_page)
+        self.stackedwidget.setCurrentIndex(0)
+        self.first_page.label_mcdonalds.clicked.connect(lambda:self.add_second_page(self.first_page.link_click()))
+
+    def add_second_page(self,store):
+        self.second_page = View_Menu_Second_Page(store)
+        self.stackedwidget.addWidget(self.second_page)
+        self.stackedwidget.setCurrentIndex(1)
+        self.second_page.BlueButton.clicked.connect(lambda:self.add_third_page(self.first_page.link_click(),self.second_page.submit_click()))
+
+
+    def add_third_page(self,store,date_and_time):
+        self.third_page = View_Menu_Third_Page(store,date_and_time)
+        self.stackedwidget.addWidget(self.third_page)
+        self.repaint()
+        self.stackedwidget.setCurrentIndex(2)
+        #self.third_page.BlueButton_2.clicked.connect(lambda: self.add_first_page())
+
+
+        # self.first_page = View_Menu_First_Page()
+        # self.second_page = View_Menu_Second_Page(self.first_page.link_click())
+        # self.third_page = View_Menu_Third_Page(self.first_page.link_click(),self.second_page.submit_click())
+        # self.stackedwidget.addWidget(self.first_page)
+        # self.stackedwidget.addWidget(self.second_page)
+        # self.stackedwidget.addWidget(self.third_page)
+        # self.stackedwidget.setCurrentIndex(0)
+
+        # self.first_page.label_mcdonalds.clicked.connect(lambda: self.stackedwidget.setCurrentIndex(1))
+        # self.second_page.BlueButton.clicked.connect(lambda : self.stackedwidget.setCurrentIndex(2))
+        # self.third_page.BlueButton_2.clicked.connect(lambda: self.stackedwidget.setCurrentIndex(0))
 
 if __name__ == '__main__':
     import sys
     
     app =QtWidgets.QApplication(sys.argv)
-    w = Lunch_Mcdonald()
+    #controller = Controller()
+    w = View_Menu()
     w.show()
+    #controller.first_page()
     sys.exit(app.exec_())
