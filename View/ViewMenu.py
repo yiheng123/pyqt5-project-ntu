@@ -52,21 +52,19 @@ class View_Menu_First_Page(QWidget):
         self.label_mcdonalds.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonald.png"))
         self.label_mcdonalds.setScaledContents(True)
         self.label_mcdonalds.setObjectName("label_mcdonalds")
-        #self.label_mcdonalds.clicked.connect(self.link_click)
-
-        self.label_kfc = QtWidgets.QLabel(self)
+        self.label_kfc = QLabelClickable(self)
         self.label_kfc.setGeometry(QtCore.QRect(470, 360, 200, 200))
         self.label_kfc.setText("")
         self.label_kfc.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/590607570cbeef0acff9a641.png"))
         self.label_kfc.setScaledContents(True)
         self.label_kfc.setObjectName("label_kfc")
-        self.label_subway = QtWidgets.QLabel(self)
+        self.label_subway = QLabelClickable(self)
         self.label_subway.setGeometry(QtCore.QRect(470, 140, 200, 200))
         self.label_subway.setText("")
         self.label_subway.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/subway-logo.jpg"))
         self.label_subway.setScaledContents(True)
         self.label_subway.setObjectName("label_subway")
-        self.label_malay = QtWidgets.QLabel(self)
+        self.label_malay = QLabelClickable(self)
         self.label_malay.setGeometry(QtCore.QRect(120, 360, 200, 200))
         self.label_malay.setText("")
         self.label_malay.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/39840570-nasi-goreng-icon-indonesian-fried-rice.jpg"))
@@ -83,7 +81,7 @@ class View_Menu_First_Page(QWidget):
         return "Subway"
     def Malay_link_click(self):
         return "Malay"
-    def KFC_link_clic(self):
+    def KFC_link_click(self):
         return "KFC"
     
 
@@ -703,14 +701,18 @@ class View_Menu(QWidget):
         self.first_page = View_Menu_First_Page()
         self.stackedwidget.addWidget(self.first_page)
         self.stackedwidget.setCurrentIndex(0)
+        self.first_page.label_malay.clicked.connect(lambda:self.add_second_page(self.first_page.Malay_link_click())) #only can use lambda: to make use of return value form functions
         self.first_page.label_mcdonalds.clicked.connect(lambda:self.add_second_page(self.first_page.MC_link_click())) #only can use lambda: to make use of return value form functions
+        self.first_page.label_kfc.clicked.connect(lambda:self.add_second_page(self.first_page.KFC_link_click())) #only can use lambda: to make use of return value form functions
+        self.first_page.label_subway.clicked.connect(lambda:self.add_second_page(self.first_page.Subway_link_click())) #only can use lambda: to make use of return value form functions
 
     #function to show second page
     def add_second_page(self,store):
         self.second_page = View_Menu_Second_Page(store)
         self.stackedwidget.addWidget(self.second_page)
         self.stackedwidget.setCurrentIndex(1)
-        self.second_page.BlueButton.clicked.connect(lambda:self.add_third_page(self.first_page.MC_link_click(),self.second_page.submit_click()))
+        if self.second_page.label.text() == "Mcdonalds":
+            self.second_page.BlueButton.clicked.connect(lambda:self.add_third_page(self.first_page.MC_link_click(),self.second_page.submit_click()))
 
     #function to show third page
     def add_third_page(self,store,date_and_time):

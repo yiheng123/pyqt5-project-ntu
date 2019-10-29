@@ -1,2 +1,2 @@
 Double_Mcspicy 2 11.40
-Mc_Chicken 2 8.40
+Big_Mac 2 14.40

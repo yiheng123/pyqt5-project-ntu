@@ -86,6 +86,7 @@ class Pay_First_Page(QWidget):
         self.label_2.setText(_translate("Cart_and_Pay", "Pay Your Bill Here"))
         self.BlueButton.setText(_translate("Cart_and_Pay", "Pay"))
         self.BlueButton2.setText(_translate("Cart_and_Pay", "Load Data"))
+        self.BlueButton.hide()
     #functions to load data
     def load_data(self):
         data = self.read_data()
@@ -99,10 +100,15 @@ class Pay_First_Page(QWidget):
             self.tableWidget.setRowCount(row+1)
             self.tableWidget.setItem(row,0,QTableWidgetItem("Total:"))
             self.tableWidget.setItem(row,2,QTableWidgetItem(str(total_price)[0:5]))
+            self.BlueButton.show()
+            self.BlueButton2.hide()
         else:
-            sys.exit("No database found") #if no data found, exit the app
-            
-
+            self.msg = QMessageBox(self) #if no data found, exit the app
+            #self.msg.setIcon(QMessageBox.Information)
+            self.msg.setText("asd")
+            self.msg.setStyleSheet("QLabel{min-width:200 px; font-size: 24px;} QPushButton{ width:200px; font-size: 18px; }")
+            self.msg.setWindowTitle('No database Found')
+            self.msg.exec_()
 
         
     #function to add item to tablewidget
@@ -226,6 +232,7 @@ class Cart_Pay(QWidget):
         self.first_page = Pay_First_Page()
         self.stackedwidget.addWidget(self.first_page)
         self.stackedwidget.setCurrentIndex(0)
+        print(self.first_page.tableWidget.rowCount())
         self.first_page.BlueButton.clicked.connect(self.add_second_page) #only can use lambda: to make use of return value form functions
 
     #function to show second page
