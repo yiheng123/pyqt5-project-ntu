@@ -210,6 +210,8 @@ class See_Waiting_Time(QWidget):
             num_of_people = int(input_text)
             if num_of_people > 100:
                 self.label_5.setText("Please enter a valid integer number")
+            elif num_of_people < 0:
+                self.label_5.setText("Please enter a valid integer number")
             else:
                 self.label_5.setText("Your estimated waitting time is "+str(num_of_people*2)+" mins")
         except:
