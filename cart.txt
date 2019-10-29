@@ -1,3 +1,2 @@
-Double_Cheese_Burger 2 8.60
-Mc_Wrap 4 22.80
-Mc_Nugguts 2 6.40
+Double_Mcspicy 2 11.40
+Mc_Chicken 2 8.40

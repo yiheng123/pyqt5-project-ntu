@@ -55,16 +55,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>90</y>
-     <width>381</width>
-     <height>411</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="BlueButton">
    <property name="geometry">
     <rect>
@@ -123,6 +113,16 @@
    </property>
    <property name="text">
     <string>Pay</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>90</y>
+     <width>341</width>
+     <height>421</height>
+    </rect>
    </property>
   </widget>
  </widget>

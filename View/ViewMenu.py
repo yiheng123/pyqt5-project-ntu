@@ -6,7 +6,7 @@ import os
 from datetime import datetime
 import pytz
 
-
+#Generate Class for Qlabel clickable events
 class QLabelClickable(QtWidgets.QLabel):
     clicked = pyqtSignal(str)
     def __init__(self, parent=None):
@@ -28,7 +28,7 @@ class QLabelClickable(QtWidgets.QLabel):
             self.clicked.emit(self.ultimo)
 
 class View_Menu_First_Page(QWidget):
-    switch_window = pyqtSignal(str)
+    #initialize UI
     def __init__(self,parent=None):
         super(View_Menu_First_Page,self).__init__(parent)
         self.setup_Ui()
@@ -52,7 +52,7 @@ class View_Menu_First_Page(QWidget):
         self.label_mcdonalds.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonald.png"))
         self.label_mcdonalds.setScaledContents(True)
         self.label_mcdonalds.setObjectName("label_mcdonalds")
-        self.label_mcdonalds.clicked.connect(self.link_click)
+        #self.label_mcdonalds.clicked.connect(self.link_click)
 
         self.label_kfc = QtWidgets.QLabel(self)
         self.label_kfc.setGeometry(QtCore.QRect(470, 360, 200, 200))
@@ -76,20 +76,23 @@ class View_Menu_First_Page(QWidget):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("ViewMenu_Select_Store", "Form"))
         self.label_title.setText(_translate("ViewMenu_Select_Store", "Select Store Menu"))
-    def link_click(self):
+    def MC_link_click(self):
         print("haha")
-        self.switch_window.emit("Mcdonalds")
-        return "Mcdonalds"
-        #global text = "Mcdonalds"
+        return "Mcdonalds" #return message for multipage interation
+    def Subway_link_click(self):
+        return "Subway"
+    def Malay_link_click(self):
+        return "Malay"
+    def KFC_link_clic(self):
+        return "KFC"
+    
 
 
-
+#Response from first page click information to generate second page
 class View_Menu_Second_Page(QWidget):
-    switch_window = pyqtSignal(str)
     def __init__(self,text,parent=None):
         super(View_Menu_Second_Page,self).__init__(parent)
         self.setup_Ui(text)
-        self.BlueButton.clicked.connect(self.submit_click)
     def setup_Ui(self,text):
         self.setObjectName("View_Menu_Second_Page")
         self.resize(800, 600)
@@ -112,6 +115,7 @@ class View_Menu_Second_Page(QWidget):
 "    min-height: 96px;\n"
 "    max-height: 96px;\n"
 "    border-radius: 48px; /*Round*/\n"
+"    color: #FFFFFF;\n"
 "}\n"
 "#BlueButton:hover {\n"
 "    background-color: #516cb0;\n"
@@ -161,6 +165,7 @@ class View_Menu_Second_Page(QWidget):
         self.label.setText(_translate("Form", text))
         self.BlueButton.setText(_translate("Form", "Submit"))
         self.label_2.setText(_translate("Form", "Please Select The Date and Time You Would Like To View"))
+    #To return the date and time from the selection on qtdateEdit and timeEdit
     def submit_click(self):
         print(self.dateEdit.date())
         date = self.dateEdit.date().toPyDate()
@@ -169,17 +174,23 @@ class View_Menu_Second_Page(QWidget):
         print(datetime_str)
         return datetime_str
 
+#Response for the first page and second page information to get the menu to show
 class View_Menu_Third_Page(QWidget):
 
     def __init__(self,store,dateandtime,parent=None):
         super(View_Menu_Third_Page,self).__init__(parent)
-        print(dateandtime[11:13])
         if store == "Mcdonalds":
             if int(dateandtime[11:13]) >= 12:
                 self.setup_Ui_Pm_Mcdonalds()
             else:
                 self.setup_Ui_Am_Mcdonalds()
-    
+        if store == "Subway":
+            pass
+        if store == "Malay":
+            pass
+        if store == "KFC":
+            pass
+    #menu from the McDonalds.py where we remove all the counters and buttons
     def setup_Ui_Pm_Mcdonalds(self):
         self.setObjectName("Pm Mcdonald")
         self.resize(800,600)
@@ -675,9 +686,10 @@ class View_Menu_Third_Page(QWidget):
 
         
     
-
+#Controller Class to control all the page interations
 class View_Menu(QWidget):
 
+    #Initialiaze the first page for class View_Menu_First_Page()
     def __init__(self,parent=None):
         super(View_Menu,self).__init__(parent)
         self.resize(800,600)
@@ -685,48 +697,31 @@ class View_Menu(QWidget):
         self.stackedwidget.setGeometry(QtCore.QRect(0,0 , 800, 600))
         self.stackedwidget.setObjectName("stackwidget")
         self.add_first_page()
-        self.repaint()
 
-
+    #function to show first page
     def add_first_page(self):
         self.first_page = View_Menu_First_Page()
         self.stackedwidget.addWidget(self.first_page)
         self.stackedwidget.setCurrentIndex(0)
-        self.first_page.label_mcdonalds.clicked.connect(lambda:self.add_second_page(self.first_page.link_click()))
+        self.first_page.label_mcdonalds.clicked.connect(lambda:self.add_second_page(self.first_page.MC_link_click())) #only can use lambda: to make use of return value form functions
 
+    #function to show second page
     def add_second_page(self,store):
         self.second_page = View_Menu_Second_Page(store)
         self.stackedwidget.addWidget(self.second_page)
         self.stackedwidget.setCurrentIndex(1)
-        self.second_page.BlueButton.clicked.connect(lambda:self.add_third_page(self.first_page.link_click(),self.second_page.submit_click()))
+        self.second_page.BlueButton.clicked.connect(lambda:self.add_third_page(self.first_page.MC_link_click(),self.second_page.submit_click()))
 
-
+    #function to show third page
     def add_third_page(self,store,date_and_time):
         self.third_page = View_Menu_Third_Page(store,date_and_time)
         self.stackedwidget.addWidget(self.third_page)
-        self.repaint()
         self.stackedwidget.setCurrentIndex(2)
-        #self.third_page.BlueButton_2.clicked.connect(lambda: self.add_first_page())
-
-
-        # self.first_page = View_Menu_First_Page()
-        # self.second_page = View_Menu_Second_Page(self.first_page.link_click())
-        # self.third_page = View_Menu_Third_Page(self.first_page.link_click(),self.second_page.submit_click())
-        # self.stackedwidget.addWidget(self.first_page)
-        # self.stackedwidget.addWidget(self.second_page)
-        # self.stackedwidget.addWidget(self.third_page)
-        # self.stackedwidget.setCurrentIndex(0)
-
-        # self.first_page.label_mcdonalds.clicked.connect(lambda: self.stackedwidget.setCurrentIndex(1))
-        # self.second_page.BlueButton.clicked.connect(lambda : self.stackedwidget.setCurrentIndex(2))
-        # self.third_page.BlueButton_2.clicked.connect(lambda: self.stackedwidget.setCurrentIndex(0))
 
 if __name__ == '__main__':
     import sys
     
     app =QtWidgets.QApplication(sys.argv)
-    #controller = Controller()
     w = View_Menu()
     w.show()
-    #controller.first_page()
     sys.exit(app.exec_())

@@ -12,10 +12,10 @@ class Lunch_Mcdonald(QWidget):
         super(Lunch_Mcdonald,self).__init__(parent)
 
         self.setup_Ui()
-        self.string="" # string to write to file
+        self.string="" # prepare the string to write to file
         self.BlueButton.clicked.connect(self.clear_all) #button connnect to clear all user input and cart database
         self.BlueButton_2.clicked.connect(self.add_to_cart) #add the user input and calculate price
-        self.BlueButton_3.clicked.connect(self.operate_hours)
+        self.BlueButton_3.clicked.connect(self.operate_hours) #to show operating hourss
         
     #function to clear all the user unput and remove database
     def clear_all(self): 
@@ -40,7 +40,7 @@ class Lunch_Mcdonald(QWidget):
 
     
     def add_to_cart(self):
-        #group all items inside dictionary
+        #group all items inside list 
         items_lists=[
             [self.item_one_num,self.item_one_price,self.item_one_text] ,
             [self.item_two_num,self.item_two_price,self.item_two_text] ,
@@ -72,11 +72,11 @@ class Lunch_Mcdonald(QWidget):
             (5,6) : "11am - 12pm", #weekends
         }
         tz_SG = pytz.timezone('Asia/Singapore') 
-        now = datetime.now(tz_SG)
-        now_weekday = now.weekday()
+        now = datetime.now(tz_SG) 
+        now_weekday = now.weekday() #get current time
         for key in operating_hour_dic:
             if now_weekday in key:
-                self.operating_hour = operating_hour_dic[key]
+                self.operating_hour = operating_hour_dic[key] #get the operating hour from dic
 
         print(self.operating_hour)
         _translate = QtCore.QCoreApplication.translate
@@ -923,6 +923,6 @@ if __name__ == '__main__':
     import sys
     
     app =QtWidgets.QApplication(sys.argv)
-    w = Lunch_Mcdonald()
-    w.show()
+    window = Lunch_Mcdonald()
+    window.show()
     sys.exit(app.exec_())

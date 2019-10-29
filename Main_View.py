@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QWidget, QListWidget, QStackedWidget, QHBoxLayout, Q
 from View import Main_Page1
 from View import McDonalds
 from View import ViewMenu
+from View import CartPay
 import sys
 from PyQt5.QtWidgets import QApplication
 from datetime import datetime
@@ -108,6 +109,8 @@ class LeftTabWidget(QWidget):
 
 
         #pay and cart page
+        pay_and_cart_window = CartPay.Cart_Pay()
+        self.stackedWidget.addWidget(pay_and_cart_window)
 
 
 
