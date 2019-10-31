@@ -33,7 +33,7 @@ class Lunch_Mcdonald(QWidget):
         #clear the string write to data base
         self.string=""        
         try:
-            os.remove("C:/Users/RUIZHI/Desktop/mini_project/cart.txt") #remove data base
+            os.remove("./cart.txt") #remove data base
         except:
             pass
 
@@ -54,7 +54,7 @@ class Lunch_Mcdonald(QWidget):
             [self.item_ten_num,self.item_ten_price,self.item_ten_text] ,
         ]
         #prepare to write the data to database
-        with open("C:/Users/RUIZHI/Desktop/mini_project/cart.txt","w") as f:
+        with open("./cart.txt","w") as f:
             for item_list in items_lists:
                 print(item_list[0].value()) #for debugging
                 if item_list[0].value() != 0:
@@ -105,13 +105,13 @@ class Lunch_Mcdonald(QWidget):
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
-        self.item_seven_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Nugguts.png"))
+        self.item_seven_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Nugguts.png"))
         self.item_seven_pic.setScaledContents(True)
         self.item_seven_pic.setObjectName("item_seven_pic")
         self.item_eight_pic = QtWidgets.QLabel(self)
         self.item_eight_pic.setGeometry(QtCore.QRect(660, 219, 91, 81))
         self.item_eight_pic.setText("")
-        self.item_eight_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Coke.png"))
+        self.item_eight_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Coke.png"))
         self.item_eight_pic.setScaledContents(True)
         self.item_eight_pic.setObjectName("item_eight_pic")
         self.item_eight_text = QtWidgets.QLabel(self)
@@ -147,7 +147,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_five_pic = QtWidgets.QLabel(self)
         self.item_five_pic.setGeometry(QtCore.QRect(50, 220, 91, 71))
         self.item_five_pic.setText("")
-        self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Chicken.png"))
+        self.item_five_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Chicken.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
         self.item_eight_num = QtWidgets.QSpinBox(self)
@@ -174,7 +174,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_six_pic = QtWidgets.QLabel(self)
         self.item_six_pic.setGeometry(QtCore.QRect(260, 190, 100, 100))
         self.item_six_pic.setText("")
-        self.item_six_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Wrap.png"))
+        self.item_six_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Wrap.png"))
         self.item_six_pic.setScaledContents(True)
         self.item_six_pic.setObjectName("item_six_pic")
         self.item_eight_price = QtWidgets.QLabel(self)
@@ -189,13 +189,13 @@ class Lunch_Mcdonald(QWidget):
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
-        self.item_three_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Double Cheese Burger.png"))
+        self.item_three_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Double Cheese Burger.png"))
         self.item_three_pic.setScaledContents(True)
         self.item_three_pic.setObjectName("item_three_pic")
         self.item_four_pic = QtWidgets.QLabel(self)
         self.item_four_pic.setGeometry(QtCore.QRect(670, 40, 71, 71))
         self.item_four_pic.setText("")
-        self.item_four_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Filet O Fish.png"))
+        self.item_four_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Filet O Fish.png"))
         self.item_four_pic.setScaledContents(True)
         self.item_four_pic.setObjectName("item_four_pic")
         self.item_four_text = QtWidgets.QLabel(self)
@@ -231,7 +231,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_one_pic = QtWidgets.QLabel(self)
         self.item_one_pic.setGeometry(QtCore.QRect(50, 20, 100, 100))
         self.item_one_pic.setText("")
-        self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Double Mcspicy.png"))
+        self.item_one_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Double Mcspicy.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
         self.item_four_num = QtWidgets.QSpinBox(self)
@@ -258,7 +258,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_two_pic = QtWidgets.QLabel(self)
         self.item_two_pic.setGeometry(QtCore.QRect(259, 29, 91, 81))
         self.item_two_pic.setText("")
-        self.item_two_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Big Mac.png"))
+        self.item_two_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Big Mac.png"))
         self.item_two_pic.setScaledContents(True)
         self.item_two_pic.setObjectName("item_two_pic")
         self.item_four_price = QtWidgets.QLabel(self)
@@ -288,7 +288,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_nine_pic = QtWidgets.QLabel(self)
         self.item_nine_pic.setGeometry(QtCore.QRect(50, 370, 100, 100))
         self.item_nine_pic.setText("")
-        self.item_nine_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Apple Pie.png"))
+        self.item_nine_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Apple Pie.png"))
         self.item_nine_pic.setScaledContents(True)
         self.item_nine_pic.setObjectName("item_nine_pic")
         self.item_nine_text = QtWidgets.QLabel(self)
@@ -303,7 +303,7 @@ class Lunch_Mcdonald(QWidget):
         self.item_ten_pic = QtWidgets.QLabel(self)
         self.item_ten_pic.setGeometry(QtCore.QRect(270, 370, 71, 91))
         self.item_ten_pic.setText("")
-        self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
+        self.item_ten_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
         self.BlueButton = QtWidgets.QPushButton(self)
@@ -490,7 +490,7 @@ class Breakfast_Mcdonald(QWidget):
         #clear the string write to data base
         self.string=""        
         try:
-            os.remove("C:/Users/RUIZHI/Desktop/mini_project/cart.txt") #remove data base
+            os.remove("./cart.txt") #remove data base
         except:
             pass
 
@@ -511,7 +511,7 @@ class Breakfast_Mcdonald(QWidget):
             [self.item_ten_num,self.item_ten_price,self.item_ten_text] ,
         ]
         #prepare to write the data to database
-        with open("C:/Users/RUIZHI/Desktop/mini_project/cart.txt","w") as f:
+        with open("./cart.txt","w") as f:
             for item_list in items_lists:
                 print(item_list[0].value()) #for debugging
                 if item_list[0].value() != 0:
@@ -562,13 +562,13 @@ class Breakfast_Mcdonald(QWidget):
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
-        self.item_seven_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Apple Pie.png"))
+        self.item_seven_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Apple Pie.png"))
         self.item_seven_pic.setScaledContents(True)
         self.item_seven_pic.setObjectName("item_seven_pic")
         self.item_eight_pic = QtWidgets.QLabel(self)
         self.item_eight_pic.setGeometry(QtCore.QRect(660, 219, 91, 81))
         self.item_eight_pic.setText("")
-        self.item_eight_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Coffee.png"))
+        self.item_eight_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Coffee.png"))
         self.item_eight_pic.setScaledContents(True)
         self.item_eight_pic.setObjectName("item_eight_pic")
         self.item_eight_text = QtWidgets.QLabel(self)
@@ -604,7 +604,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_five_pic = QtWidgets.QLabel(self)
         self.item_five_pic.setGeometry(QtCore.QRect(50, 220, 91, 71))
         self.item_five_pic.setText("")
-        self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Filet O Fish.png"))
+        self.item_five_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Filet O Fish.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
         self.item_eight_num = QtWidgets.QSpinBox(self)
@@ -631,7 +631,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_six_pic = QtWidgets.QLabel(self)
         self.item_six_pic.setGeometry(QtCore.QRect(260, 190, 100, 100))
         self.item_six_pic.setText("")
-        self.item_six_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mcwings.png"))
+        self.item_six_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mcwings.png"))
         self.item_six_pic.setScaledContents(True)
         self.item_six_pic.setObjectName("item_six_pic")
         self.item_eight_price = QtWidgets.QLabel(self)
@@ -646,13 +646,13 @@ class Breakfast_Mcdonald(QWidget):
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
-        self.item_three_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Hashbrown.png"))
+        self.item_three_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Hashbrown.png"))
         self.item_three_pic.setScaledContents(True)
         self.item_three_pic.setObjectName("item_three_pic")
         self.item_four_pic = QtWidgets.QLabel(self)
         self.item_four_pic.setGeometry(QtCore.QRect(670, 40, 71, 71))
         self.item_four_pic.setText("")
-        self.item_four_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Corn Cup.png"))
+        self.item_four_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Corn Cup.png"))
         self.item_four_pic.setScaledContents(True)
         self.item_four_pic.setObjectName("item_four_pic")
         self.item_four_text = QtWidgets.QLabel(self)
@@ -688,7 +688,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_one_pic = QtWidgets.QLabel(self)
         self.item_one_pic.setGeometry(QtCore.QRect(50, 20, 100, 100))
         self.item_one_pic.setText("")
-        self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Chicken Muffin.png"))
+        self.item_one_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Chicken Muffin.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
         self.item_four_num = QtWidgets.QSpinBox(self)
@@ -715,7 +715,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_two_pic = QtWidgets.QLabel(self)
         self.item_two_pic.setGeometry(QtCore.QRect(259, 29, 91, 81))
         self.item_two_pic.setText("")
-        self.item_two_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Sausage Muffin.png"))
+        self.item_two_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Sausage Muffin.png"))
         self.item_two_pic.setScaledContents(True)
         self.item_two_pic.setObjectName("item_two_pic")
         self.item_four_price = QtWidgets.QLabel(self)
@@ -745,7 +745,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_nine_pic = QtWidgets.QLabel(self)
         self.item_nine_pic.setGeometry(QtCore.QRect(50, 370, 100, 100))
         self.item_nine_pic.setText("")
-        self.item_nine_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Breakfast Platter.png"))
+        self.item_nine_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Breakfast Platter.png"))
         self.item_nine_pic.setScaledContents(True)
         self.item_nine_pic.setObjectName("item_nine_pic")
         self.item_nine_text = QtWidgets.QLabel(self)
@@ -760,7 +760,7 @@ class Breakfast_Mcdonald(QWidget):
         self.item_ten_pic = QtWidgets.QLabel(self)
         self.item_ten_pic.setGeometry(QtCore.QRect(270, 370, 71, 91))
         self.item_ten_pic.setText("")
-        self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
+        self.item_ten_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
         self.BlueButton = QtWidgets.QPushButton(self)

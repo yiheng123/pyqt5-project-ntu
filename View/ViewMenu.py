@@ -49,25 +49,25 @@ class View_Menu_First_Page(QWidget):
         self.label_mcdonalds = QLabelClickable(self)
         self.label_mcdonalds.setGeometry(QtCore.QRect(120, 140, 200, 200))
         self.label_mcdonalds.setText("")
-        self.label_mcdonalds.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonald.png"))
+        self.label_mcdonalds.setPixmap(QtGui.QPixmap("./Pictures/McDonald.png"))
         self.label_mcdonalds.setScaledContents(True)
         self.label_mcdonalds.setObjectName("label_mcdonalds")
         self.label_kfc = QLabelClickable(self)
         self.label_kfc.setGeometry(QtCore.QRect(470, 360, 200, 200))
         self.label_kfc.setText("")
-        self.label_kfc.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/590607570cbeef0acff9a641.png"))
+        self.label_kfc.setPixmap(QtGui.QPixmap("./Pictures/590607570cbeef0acff9a641.png"))
         self.label_kfc.setScaledContents(True)
         self.label_kfc.setObjectName("label_kfc")
         self.label_subway = QLabelClickable(self)
         self.label_subway.setGeometry(QtCore.QRect(470, 140, 200, 200))
         self.label_subway.setText("")
-        self.label_subway.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/subway-logo.jpg"))
+        self.label_subway.setPixmap(QtGui.QPixmap("./Pictures/subway-logo.jpg"))
         self.label_subway.setScaledContents(True)
         self.label_subway.setObjectName("label_subway")
         self.label_malay = QLabelClickable(self)
         self.label_malay.setGeometry(QtCore.QRect(120, 360, 200, 200))
         self.label_malay.setText("")
-        self.label_malay.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/39840570-nasi-goreng-icon-indonesian-fried-rice.jpg"))
+        self.label_malay.setPixmap(QtGui.QPixmap("./Pictures/39840570-nasi-goreng-icon-indonesian-fried-rice.jpg"))
         self.label_malay.setScaledContents(True)
         self.label_malay.setObjectName("label_malay")
         QtCore.QMetaObject.connectSlotsByName(self)
@@ -134,7 +134,7 @@ class View_Menu_Second_Page(QWidget):
         self.label_3 = QtWidgets.QLabel(self)
         self.label_3.setGeometry(QtCore.QRect(100, 300, 571, 291))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/"+text+".png"))
+        self.label_3.setPixmap(QtGui.QPixmap("./Pictures/"+text+".png"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.dateEdit = QtWidgets.QDateEdit(self)
@@ -208,13 +208,13 @@ class View_Menu_Third_Page(QWidget):
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
-        self.item_seven_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Nugguts.png"))
+        self.item_seven_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Nugguts.png"))
         self.item_seven_pic.setScaledContents(True)
         self.item_seven_pic.setObjectName("item_seven_pic")
         self.item_eight_pic = QtWidgets.QLabel(self)
         self.item_eight_pic.setGeometry(QtCore.QRect(660, 219, 91, 81))
         self.item_eight_pic.setText("")
-        self.item_eight_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Coke.png"))
+        self.item_eight_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Coke.png"))
         self.item_eight_pic.setScaledContents(True)
         self.item_eight_pic.setObjectName("item_eight_pic")
         self.item_eight_text = QtWidgets.QLabel(self)
@@ -244,7 +244,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_five_pic = QtWidgets.QLabel(self)
         self.item_five_pic.setGeometry(QtCore.QRect(50, 220, 91, 71))
         self.item_five_pic.setText("")
-        self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Chicken.png"))
+        self.item_five_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Chicken.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
         self.item_five_text = QtWidgets.QLabel(self)
@@ -268,7 +268,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_six_pic = QtWidgets.QLabel(self)
         self.item_six_pic.setGeometry(QtCore.QRect(260, 190, 100, 100))
         self.item_six_pic.setText("")
-        self.item_six_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Wrap.png"))
+        self.item_six_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Wrap.png"))
         self.item_six_pic.setScaledContents(True)
         self.item_six_pic.setObjectName("item_six_pic")
         self.item_eight_price = QtWidgets.QLabel(self)
@@ -280,13 +280,13 @@ class View_Menu_Third_Page(QWidget):
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
-        self.item_three_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Double Cheese Burger.png"))
+        self.item_three_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Double Cheese Burger.png"))
         self.item_three_pic.setScaledContents(True)
         self.item_three_pic.setObjectName("item_three_pic")
         self.item_four_pic = QtWidgets.QLabel(self)
         self.item_four_pic.setGeometry(QtCore.QRect(670, 40, 71, 71))
         self.item_four_pic.setText("")
-        self.item_four_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Filet O Fish.png"))
+        self.item_four_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Filet O Fish.png"))
         self.item_four_pic.setScaledContents(True)
         self.item_four_pic.setObjectName("item_four_pic")
         self.item_four_text = QtWidgets.QLabel(self)
@@ -316,7 +316,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_one_pic = QtWidgets.QLabel(self)
         self.item_one_pic.setGeometry(QtCore.QRect(50, 20, 100, 100))
         self.item_one_pic.setText("")
-        self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Double Mcspicy.png"))
+        self.item_one_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Double Mcspicy.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
         self.item_one_text = QtWidgets.QLabel(self)
@@ -340,7 +340,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_two_pic = QtWidgets.QLabel(self)
         self.item_two_pic.setGeometry(QtCore.QRect(259, 29, 91, 81))
         self.item_two_pic.setText("")
-        self.item_two_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Big Mac.png"))
+        self.item_two_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Big Mac.png"))
         self.item_two_pic.setScaledContents(True)
         self.item_two_pic.setObjectName("item_two_pic")
         self.item_four_price = QtWidgets.QLabel(self)
@@ -364,7 +364,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_nine_pic = QtWidgets.QLabel(self)
         self.item_nine_pic.setGeometry(QtCore.QRect(50, 370, 100, 100))
         self.item_nine_pic.setText("")
-        self.item_nine_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Apple Pie.png"))
+        self.item_nine_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Apple Pie.png"))
         self.item_nine_pic.setScaledContents(True)
         self.item_nine_pic.setObjectName("item_nine_pic")
         self.item_nine_text = QtWidgets.QLabel(self)
@@ -379,7 +379,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_ten_pic = QtWidgets.QLabel(self)
         self.item_ten_pic.setGeometry(QtCore.QRect(270, 370, 71, 91))
         self.item_ten_pic.setText("")
-        self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
+        self.item_ten_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
         self.item_six_price.raise_()
@@ -434,6 +434,37 @@ class View_Menu_Third_Page(QWidget):
         self.item_nine_price.setText(_translate("Mcdonalds", "$2.0"))
         self.item_ten_text.setText(_translate("Mcdonalds", "Fries"))
         self.item_nine_text.setText(_translate("Mcdonalds", "Apple Pie"))
+        self.BlueButton_2 = QtWidgets.QPushButton(self)
+        self.BlueButton_2.setGeometry(QtCore.QRect(700, 500, 72, 72))
+        self.BlueButton_2.setStyleSheet("QPushButton {\n"
+"    border: none; \n"
+"    background-color: #303d5e;\n"
+"    /*minimum size*/\n"
+"    min-width: 72px;\n"
+"    max-width: 72px;\n"
+"    min-height: 72px;\n"
+"    max-height: 72px;\n"
+"    border-radius: 36px; /*Round*/\n"
+"    color: #FFFFFF;\n"
+"    \n"
+"}\n"
+"QPushButton:hover {\n"
+"     background-color: #516cb0;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"     background-color: #04070f;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"")
+        self.BlueButton_2.setObjectName("BlueButton_2")
+        self.BlueButton_2.raise_()
+        self.BlueButton_2.setText(_translate("Mcdonalds", "back"))
 
 
     def setup_Ui_Am_Mcdonalds(self):
@@ -455,13 +486,13 @@ class View_Menu_Third_Page(QWidget):
         self.item_seven_pic = QtWidgets.QLabel(self)
         self.item_seven_pic.setGeometry(QtCore.QRect(450, 229, 100, 71))
         self.item_seven_pic.setText("")
-        self.item_seven_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Apple Pie.png"))
+        self.item_seven_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Apple Pie.png"))
         self.item_seven_pic.setScaledContents(True)
         self.item_seven_pic.setObjectName("item_seven_pic")
         self.item_eight_pic = QtWidgets.QLabel(self)
         self.item_eight_pic.setGeometry(QtCore.QRect(660, 219, 91, 81))
         self.item_eight_pic.setText("")
-        self.item_eight_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Coffee.png"))
+        self.item_eight_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Coffee.png"))
         self.item_eight_pic.setScaledContents(True)
         self.item_eight_pic.setObjectName("item_eight_pic")
         self.item_eight_text = QtWidgets.QLabel(self)
@@ -491,7 +522,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_five_pic = QtWidgets.QLabel(self)
         self.item_five_pic.setGeometry(QtCore.QRect(50, 220, 91, 71))
         self.item_five_pic.setText("")
-        self.item_five_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Filet O Fish.png"))
+        self.item_five_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Filet O Fish.png"))
         self.item_five_pic.setScaledContents(True)
         self.item_five_pic.setObjectName("item_five_pic")
         self.item_five_text = QtWidgets.QLabel(self)
@@ -515,7 +546,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_six_pic = QtWidgets.QLabel(self)
         self.item_six_pic.setGeometry(QtCore.QRect(260, 190, 100, 100))
         self.item_six_pic.setText("")
-        self.item_six_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mcwings.png"))
+        self.item_six_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mcwings.png"))
         self.item_six_pic.setScaledContents(True)
         self.item_six_pic.setObjectName("item_six_pic")
         self.item_eight_price = QtWidgets.QLabel(self)
@@ -527,13 +558,13 @@ class View_Menu_Third_Page(QWidget):
         self.item_three_pic = QtWidgets.QLabel(self)
         self.item_three_pic.setGeometry(QtCore.QRect(450, 20, 100, 100))
         self.item_three_pic.setText("")
-        self.item_three_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Hashbrown.png"))
+        self.item_three_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Hashbrown.png"))
         self.item_three_pic.setScaledContents(True)
         self.item_three_pic.setObjectName("item_three_pic")
         self.item_four_pic = QtWidgets.QLabel(self)
         self.item_four_pic.setGeometry(QtCore.QRect(670, 40, 71, 71))
         self.item_four_pic.setText("")
-        self.item_four_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Corn Cup.png"))
+        self.item_four_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Corn Cup.png"))
         self.item_four_pic.setScaledContents(True)
         self.item_four_pic.setObjectName("item_four_pic")
         self.item_four_text = QtWidgets.QLabel(self)
@@ -563,7 +594,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_one_pic = QtWidgets.QLabel(self)
         self.item_one_pic.setGeometry(QtCore.QRect(50, 20, 100, 100))
         self.item_one_pic.setText("")
-        self.item_one_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Chicken Muffin.png"))
+        self.item_one_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Chicken Muffin.png"))
         self.item_one_pic.setScaledContents(True)
         self.item_one_pic.setObjectName("item_one_pic")
         self.item_one_text = QtWidgets.QLabel(self)
@@ -587,7 +618,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_two_pic = QtWidgets.QLabel(self)
         self.item_two_pic.setGeometry(QtCore.QRect(259, 29, 91, 81))
         self.item_two_pic.setText("")
-        self.item_two_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Mc Sausage Muffin.png"))
+        self.item_two_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Mc Sausage Muffin.png"))
         self.item_two_pic.setScaledContents(True)
         self.item_two_pic.setObjectName("item_two_pic")
         self.item_four_price = QtWidgets.QLabel(self)
@@ -611,7 +642,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_nine_pic = QtWidgets.QLabel(self)
         self.item_nine_pic.setGeometry(QtCore.QRect(50, 370, 100, 100))
         self.item_nine_pic.setText("")
-        self.item_nine_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Breakfast Platter.png"))
+        self.item_nine_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Breakfast Platter.png"))
         self.item_nine_pic.setScaledContents(True)
         self.item_nine_pic.setObjectName("item_nine_pic")
         self.item_nine_text = QtWidgets.QLabel(self)
@@ -626,7 +657,7 @@ class View_Menu_Third_Page(QWidget):
         self.item_ten_pic = QtWidgets.QLabel(self)
         self.item_ten_pic.setGeometry(QtCore.QRect(270, 370, 71, 91))
         self.item_ten_pic.setText("")
-        self.item_ten_pic.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/McDonalds/Fries.png"))
+        self.item_ten_pic.setPixmap(QtGui.QPixmap("./Pictures/McDonalds/Fries.png"))
         self.item_ten_pic.setScaledContents(True)
         self.item_ten_pic.setObjectName("item_ten_pic")
         self.item_six_price.raise_()
@@ -681,6 +712,37 @@ class View_Menu_Third_Page(QWidget):
         self.item_nine_price.setText(_translate("Mcdonalds", "$8.2"))
         self.item_ten_text.setText(_translate("Mcdonalds", "Fries"))
         self.item_nine_text.setText(_translate("Mcdonalds", "Breakfast Platter"))
+        self.BlueButton_2 = QtWidgets.QPushButton(self)
+        self.BlueButton_2.setGeometry(QtCore.QRect(700, 500, 72, 72))
+        self.BlueButton_2.setStyleSheet("QPushButton {\n"
+"    border: none; \n"
+"    background-color: #303d5e;\n"
+"    /*minimum size*/\n"
+"    min-width: 72px;\n"
+"    max-width: 72px;\n"
+"    min-height: 72px;\n"
+"    max-height: 72px;\n"
+"    border-radius: 36px; /*Round*/\n"
+"    color: #FFFFFF;\n"
+"    \n"
+"}\n"
+"QPushButton:hover {\n"
+"     background-color: #516cb0;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"     background-color: #04070f;\n"
+"\n"
+"}\n"
+"\n"
+"\n"
+"\n"
+"\n"
+"")
+        self.BlueButton_2.setObjectName("BlueButton_2")
+        self.BlueButton_2.raise_()
+        self.BlueButton_2.setText(_translate("Mcdonalds", "back"))
 
         
     
@@ -719,6 +781,12 @@ class View_Menu(QWidget):
         self.third_page = View_Menu_Third_Page(store,date_and_time)
         self.stackedwidget.addWidget(self.third_page)
         self.stackedwidget.setCurrentIndex(2)
+        self.third_page.BlueButton_2.clicked.connect(self.go_back)
+
+    def go_back(self):
+        self.stackedwidget.setCurrentIndex(0)
+        self.stackedwidget.removeWidget(self.second_page)
+        self.stackedwidget.removeWidget(self.third_page)
 
 if __name__ == '__main__':
     import sys

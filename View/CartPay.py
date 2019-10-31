@@ -19,7 +19,7 @@ class Pay_First_Page(QWidget):
         self.label = QtWidgets.QLabel(self)
         self.label.setGeometry(QtCore.QRect(20, 90, 331, 321))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/NTU.jpg"))
+        self.label.setPixmap(QtGui.QPixmap("./Pictures/NTU.jpg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self)
@@ -122,7 +122,7 @@ class Pay_First_Page(QWidget):
     #to read data from cart.txt, if no cart.txt found, return error
     def read_data(self):
         try:
-            f = open("C:/Users/RUIZHI/Desktop/mini_project/cart.txt", "r") 
+            f = open("./cart.txt", "r") 
             lines = f.read().splitlines()
             return lines
         except:
@@ -140,13 +140,13 @@ class See_Waiting_Time(QWidget):
         self.label = QtWidgets.QLabel(self)
         self.label.setGeometry(QtCore.QRect(50, 410, 141, 171))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures/ntu_lion.png"))
+        self.label.setPixmap(QtGui.QPixmap("./Pictures/ntu_lion.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self)
         self.label_2.setGeometry(QtCore.QRect(240, 400, 551, 181))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("C:/Users/RUIZHI/Desktop/mini_project/View/Pictures//Queuing.jpg"))
+        self.label_2.setPixmap(QtGui.QPixmap("./Pictures/Queuing.jpg"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self)
