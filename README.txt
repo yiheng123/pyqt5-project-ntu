@@ -1,3 +1,9 @@
+I have spend some additional time on it.
+
+good application of PyQt5
+
+hope it will help you!
+
 ###
 ###
 ###
