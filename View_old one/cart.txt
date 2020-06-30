@@ -1,0 +1,2 @@
+KFC_Set_E 1 7.50
+Franch_Fries 1 3.00
